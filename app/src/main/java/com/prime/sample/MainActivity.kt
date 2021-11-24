@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             val elapsed = System.currentTimeMillis() - start
             Log.i(TAG, "onCreate: $elapsed")
             Log.i(TAG, "onCreate: ")
+            Log.i(TAG, "onCreate: ")
         }
     }
 }
