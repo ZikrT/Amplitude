@@ -1,5 +1,6 @@
 package com.prime.amplitude
 
+import android.util.Log
 import kotlin.reflect.KProperty
 
 /**
@@ -35,12 +36,17 @@ const val SECOND_OUT_OF_BOUNDS_PROC_CODE = 39
 const val SAMPLE_OUT_OF_BOUNDS_PROC_CODE = 40
 
 
+private const val TAG = "Result"
+
+/**
+ * The result of the [Amplitude]
+ * @throws AmplitudeException in case some error.
+ */
 class Result {
-
     /**
      * @throws AmplitudeException
      */
-    val duration: Double = 0.0
+    private val duration: Double = 0.0
         get() {
             check()
             return field
@@ -49,11 +55,29 @@ class Result {
     /**
      * @throws AmplitudeException
      */
-    val amplitudes: String = ""
+    private val amplitudes: String = ""
         get() {
             check()
             return field
         }
+
+    /**
+     * Returns [amplitudes] as [IntArray]
+     */
+    val amps: IntArray
+        get() {
+            check()
+            val values = amplitudes.split("\n")
+            val array = IntArray(values.size)
+            values.forEachIndexed { index, value ->
+                if (value.isNotEmpty()) {
+                    array[index] = value.toInt()
+                } else
+                    Log.i(TAG, "$index: $value")
+            }
+            return array
+        }
+
 
     /**
      * The errors which might have occured during the processing of [Audio] file
@@ -93,10 +117,25 @@ class Result {
 
 
     /**
-     * Permits property delegation of `val`s using `by` for [State].
+     * Permits property delegation of `val`s using `by` for [Result].
      * @throws AmplitudeException
      */
     @Suppress("NOTHING_TO_INLINE")
     operator fun getValue(thisObj: Any?, property: KProperty<*>): String = amplitudes
+
+    /**
+     * Returns the amplitudes as intArray.
+     */
+    operator fun component1(): IntArray {
+        return amps
+    }
+
+    /**
+     * Returns the duration of the audio file.
+     * @throws AmplitudeException
+     */
+    operator fun component2(): Long {
+        return duration.toLong()
+    }
 }
 
