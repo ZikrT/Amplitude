@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             val list = contentResolver.Audios
 
             val start = System.currentTimeMillis()
-            val res by amplitude.compute(list.last())
+            val (res, du) = amplitude.compute(list.last())
             Log.i(TAG, "onCreate: $res")
             val elapsed = System.currentTimeMillis() - start
             Log.i(TAG, "onCreate: $elapsed")
