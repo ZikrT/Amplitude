@@ -1,4 +1,4 @@
-[![GitHub version](https://badge.fury.io/gh/zikrt%2Famplitude.svg)](https://badge.fury.io/gh/zikrt%2Famplitude)
+[![version](https://badge.fury.io/gh/zikrt%2Famplitude.svg)](https://badge.fury.io/gh/zikrt%2Famplitude)
 # Amplitude
 
 ## How to add
