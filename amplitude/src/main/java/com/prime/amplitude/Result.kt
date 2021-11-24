@@ -1,5 +1,7 @@
 package com.prime.amplitude
 
+import kotlin.reflect.KProperty
+
 /**
  * Alloc code
  */
@@ -88,4 +90,13 @@ class Result {
             }
         }
     }
+
+
+    /**
+     * Permits property delegation of `val`s using `by` for [State].
+     * @throws AmplitudeException
+     */
+    @Suppress("NOTHING_TO_INLINE")
+    operator fun getValue(thisObj: Any?, property: KProperty<*>): String = amplitudes
 }
+
